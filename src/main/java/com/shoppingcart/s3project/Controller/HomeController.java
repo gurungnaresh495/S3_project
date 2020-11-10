@@ -1,12 +1,11 @@
 package com.shoppingcart.s3project.Controller;
 
+import com.shoppingcart.s3project.DAO.ProductDetailsRepo;
 import com.shoppingcart.s3project.Model.Item;
+import com.shoppingcart.s3project.Model.Product_details;
 import com.shoppingcart.s3project.Service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,15 +15,33 @@ public class HomeController {
     @Autowired
     private AppService appService;
 
-    @GetMapping("/home")
+    @GetMapping("/items")
     public List<Item> getHomePage()
     {
         return appService.getItems();
     }
 
-    @PostMapping("/add")
-    public String tryit()
+    @GetMapping("/prodDetails")
+    public List<Product_details> getProdDetails(){ return appService.getProdDetails();}
+
+    @GetMapping("/")
+    public String helloWorld()
     {
-        return "Test";
+        return "Hello, world";
     }
+
+    @PostMapping("/addItem")
+    public String addItems(@RequestBody Item item)
+    {
+        appService.addItem(item);
+        return "Added succesfully";
+    }
+
+    @PostMapping("/addProdDetail")
+    public String addProductDetails(@RequestBody Product_details product_details)
+    {
+        appService.addProductDetails(product_details);
+        return "Added succesfully";
+    }
+
 }

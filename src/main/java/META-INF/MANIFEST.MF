@@ -1,0 +1,1 @@
+Main-Class: com.shoppingcart.s3project.S3projectApplication
